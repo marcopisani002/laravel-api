@@ -11,19 +11,18 @@ use Illuminate\Support\Facades\Redis;
 class PostController extends Controller {
     public function index(Request $request) {
   
-        $posts = project::all();
+        $projects = project::with( "technologies")->paginate(20);
 
-        return response()->json($posts);
+        return response()->json($projects);
 
        
     }
 
    
 
-    public function show(Project $post) {
-        // come il with() caricare i dati di queste relazioni,
-        // dopo aver eseguito la query principale
-        $post->load("user","technologies");
+    public function show(project $post) {
+      
+        $post->load("technologies");
 
         return response()->json($post);
     }
