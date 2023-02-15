@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Post;
+use App\Models\project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
-use SebastianBergmann\CodeCoverage\Report\Xml\Project;
+
 
 class PostController extends Controller {
     public function index(Request $request) {
-        $posts = Project::all();
-        $posts = Project::with("user","technologies")->paginate(20);
+  
+        $posts = project::all();
 
         return response()->json($posts);
 
